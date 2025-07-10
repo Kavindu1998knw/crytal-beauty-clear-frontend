@@ -16,7 +16,6 @@ export default function LoginPage() {
     .then((res) => {
       toast.success(res.data.message || "Login successful");
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", res.data.user);
 
       const user = res.data.user;
       if(user.role === "admin") {
@@ -28,6 +27,8 @@ export default function LoginPage() {
 
     }).catch((err) => {
       toast.error(err.response.data.message || "Something went wrong");
+      console.log(err);
+  
     });
   }
 

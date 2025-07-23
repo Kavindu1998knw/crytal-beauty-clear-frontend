@@ -6,6 +6,7 @@ import { FaThList } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
 import AdminProductPage from "./admin/adminProductPage";
 import AddProductPage from "./admin/addProductPage";
+import EditProductPage from "./admin/editProductPage";
 
 export default function AdminPage() {
     return (
@@ -24,6 +25,7 @@ export default function AdminPage() {
                     <Route path="/orders" element={<h1>Orders</h1>} />
                     <Route path="/product/addProduct" element={<AddProductPage />} />
                     <Route path="/*" element={<h1>404 Not Found</h1>} />
+                    <Route path="/product/editProduct" element={<EditProductPage/>}/>
                 </Routes>
             </div>
         </div>

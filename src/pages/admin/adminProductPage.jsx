@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import Loader from "../../components/loader";
 
 export default function AdminProductPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate=useNavigate();
   useEffect(() => {
     if (loading){
       axios
@@ -56,7 +58,10 @@ export default function AdminProductPage() {
         <FaPlus />
       </Link>
 
-      <table className="w-full text-center">
+      {loading &&
+        <Loader/>
+      }
+      {!loading && <table className="w-full text-center">
         <thead className="bg-gray-200 h-10 text-lg font-bold rounded-md">
           <tr>
             <th>Product Id</th>
@@ -82,14 +87,18 @@ export default function AdminProductPage() {
                       onClick={() => deleteProduct(product.productId)}
                       className="hover:text-red-500"
                     />
-                    <FaPencilAlt className="hover:text-blue-500" />
+                    <FaPencilAlt
+                    onClick={()=>navigate("/admin/product/editProduct/",{state:product})}
+                     className="hover:text-blue-500" />
                   </div>
                 </td>
               </tr>
             );
           })}
         </tbody>
-      </table>
+      </table>}
+
+      
     </div>
   );
 }
